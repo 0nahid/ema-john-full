@@ -22,10 +22,34 @@ async function connect() {
 
     // get api 
     app.get('/api/products', async (req, res) => {
-        const products = await collection.find({}).toArray();
+        const page = parseInt(req.query.page);
+        const size = parseInt(req.query.size);
+        console.log(page, size);
+        const cursor = await collection.find({})
+        let products;
+        if (page || size) {
+            products = await cursor.skip(page * size).limit(size).toArray();
+        }
+        else {
+            products = await cursor.toArray();
+        }
         res.send(products);
     })
 
+
+
+    /**
+    ** // pagination
+    **    app.get('/api/products/:page', async (req, res) => {
+    **    const page = req.params.page;
+    **    const products = await collection.find({}).skip((page - 1) * 10).limit(10).toArray();
+    **    res.send(products);
+    ** })
+    */
+    app.get('/api/productCount', async (req, res) => {
+        const count = await collection.countDocuments();
+        res.send({ count });
+    })
 
 }
 connect().catch(console.dir);
