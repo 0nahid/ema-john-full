@@ -11,12 +11,16 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.szke7.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function connect() {
-    try {
-        await client.connect();
-        console.log('Connected to MongoDB');
-    } catch (err) {
-        console.log(err.stack);
-    }
+    await client.connect() ? console.log('Connected to MongoDB') : console.log('Error connecting to MongoDB');
+    const collection = client.db("shop").collection("products");
+
+    // get api 
+    app.get('/api/products', async (req, res) => {
+        const products = await collection.find({}).toArray();
+        res.send(products);
+    })
+
+
 }
 connect().catch(console.dir);
 
