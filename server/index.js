@@ -5,6 +5,12 @@ const port = 5500
 // require dor env
 require('dotenv').config()
 
+// middleware
+const cors = require('cors')
+app.use(cors())
+app.use(express.json())
+
+
 // connect mongoDB
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
