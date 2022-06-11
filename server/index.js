@@ -24,7 +24,6 @@ async function connect() {
     app.get('/api/products', async (req, res) => {
         const page = parseInt(req.query.page);
         const size = parseInt(req.query.size);
-        console.log(page, size);
         const cursor = await collection.find({})
         let products;
         if (page || size) {
