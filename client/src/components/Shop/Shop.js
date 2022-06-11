@@ -21,10 +21,10 @@ const Shop = () => {
     useEffect(() => {
         axios(`http://localhost:5500/api/productCount`)
             .then(data => {
-                const pages = data.data.count / 10;
+                const pages = data.data.count / size;
                 setPageCount(Math.ceil(pages));
             });
-    }, [])
+    }, [size])
 
     useEffect(() => {
         const storedCart = getStoredCart();
