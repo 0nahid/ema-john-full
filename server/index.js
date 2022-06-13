@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5500
+const port = process.env.PORT || 5500
 
 // require dor env
 require('dotenv').config()
@@ -17,7 +17,8 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.szke7.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 async function connect() {
-    await client.connect() ? console.log('Connected to MongoDB') : console.log('Error connecting to MongoDB');
+    await client.connect()
+    // ? console.log('Connected to MongoDB') : console.log('Error connecting to MongoDB');
     const collection = client.db("shop").collection("products");
 
     // get api 
