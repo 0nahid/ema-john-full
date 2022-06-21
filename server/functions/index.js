@@ -1,3 +1,4 @@
+const functions = require('firebase-functions');
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5500
@@ -53,6 +54,11 @@ async function connect() {
 
 }
 connect().catch(console.dir);
-
+app.get('/hero', (req, res) => {
+    res.send('Hero meets heroku');
+})
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+exports.app = functions.https.onRequest(app);
+

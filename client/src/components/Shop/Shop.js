@@ -14,12 +14,12 @@ const Shop = () => {
     const [size, setSize] = useState(10)
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5500/api/products?page=${page}&size=${size}`)
+        axios.get(`https://fathomless-harbor-03823.herokuapp.com/api/products?page=${page}&size=${size}`)
             .then(data => setProducts(data.data));
     }, [page, size]);
 
     useEffect(() => {
-        axios(`http://localhost:5500/api/productCount`)
+        axios(`https://fathomless-harbor-03823.herokuapp.com/api/productCount`)
             .then(data => {
                 const pages = data.data.count / size;
                 setPageCount(Math.ceil(pages));
