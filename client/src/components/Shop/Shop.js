@@ -14,12 +14,12 @@ const Shop = () => {
     const [size, setSize] = useState(10)
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get(`https://fathomless-harbor-03823.herokuapp.com/api/products?page=${page}&size=${size}`)
+        axios.get(`http://35.90.9.79:5500/api/products?page=${page}&size=${size}`)
             .then(data => setProducts(data.data));
     }, [page, size]);
 
     useEffect(() => {
-        axios(`https://fathomless-harbor-03823.herokuapp.com/api/productCount`)
+        axios(`http://35.90.9.79:5500/api/productCount`)
             .then(data => {
                 const pages = data.data.count / size;
                 setPageCount(Math.ceil(pages));
@@ -75,7 +75,7 @@ const Shop = () => {
                                 className={number === page ? "selected" : ''}
                                 key={number}
                                 onClick={() => setPage(number)}
-                            >{number+1}</button>)
+                            >{number + 1}</button>)
                     }
                     <select className="page-size-options" onChange={e => setSize(e.target.value)}>
                         <option value="5">5</option>

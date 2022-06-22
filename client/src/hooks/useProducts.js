@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
 import axios from "axios";
-const useProducts = () =>{
-    
+import { useEffect, useState } from "react";
+const useProducts = () => {
+
     const [products, setProducts] = useState([]);
 
-    useEffect( () =>{
-        axios.get(`https://fathomless-harbor-03823.herokuapp.com/api/products`)
-        .then(data => setProducts(data.data));
+    useEffect(() => {
+        axios.get(`http://35.90.9.79:5500/api/products`)
+            .then(data => setProducts(data.data));
     }, []);
 
     return [products, setProducts];
